@@ -1,0 +1,138 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.TagsUserControls"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:UserControl="using:Notes_Application.UserControls"
+    xmlns:bobj="using:Notes_Library.Model.BussinessObjects"
+    xmlns:vobj="using:Notes_Application.Presenter.ViewModel.Models"
+    xmlns:model="using:Notes_Library.Models"
+    xmlns:converter="using:Notes_Application.Converters"
+    Loaded="UserControl_Loaded"
+    xmlns:myControl="using:Notes_Application.Presenter.NoteView.TokenStyle"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteView/NoteViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:StringLengthConverter x:Key="TitleLengthConverter" length="20" />
+
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <ScrollViewer>
+        <!--<controls:TokenizingTextBox
+            x:Name="TagsCollection"
+            Width="310"
+            x:Uid="Tags"
+         
+            ItemsSource="{x:Bind _viewModel.NoteTags,Mode=OneWay}"
+            TextChanged="TagsCollection_TextChanged"
+            TokenItemAdding="TagsCollection_TokenItemAdding"
+            TokenItemAdded="TagsCollection_TokenItemAdded"
+            TokenItemRemoving="TagsCollection_TokenItemRemoving"
+            BorderThickness="0"
+            SelectionMode="None"
+            Background="Transparent"
+            TokenSpacing="5"
+            
+            BorderBrush="{x:Bind _viewModel.TagColor,Mode=OneWay}"
+            Padding="5"
+            PlaceholderText="Add Tags"
+            SuggestedItemsSource="{x:Bind _viewModel.TagsSuggestion,Mode=OneWay}">
+
+            
+    
+            <controls:TokenizingTextBox.TokenItemTemplate>
+                <DataTemplate
+                    x:DataType="vobj:TagVobj">
+                    <StackPanel Orientation="Horizontal" >
+                        --><!--<Ellipse 
+                                x:Name="ChipColor"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Fill="{x:Bind TagColor,Mode=OneWay}"
+                                Width="10"
+                                Height="10"
+                                Margin="0 0 10 0"/>--><!--
+                        <TextBlock 
+                            Margin="0 0 0 5"
+                            Text="{x:Bind Name,Mode=OneWay}" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </DataTemplate>
+            </controls:TokenizingTextBox.TokenItemTemplate>
+        </controls:TokenizingTextBox>-->
+
+        <myControl:MyTokenizingTextBox
+            x:Name="TagsCollection"
+            Width="310"
+            x:Uid="Tags"
+            ItemsSource="{x:Bind _viewModel.NoteTags,Mode=OneWay}"
+            TextChanged="TagsCollection_TextChanged"
+            TokenItemAdding="TagsCollection_TokenItemAdding"
+            TokenItemAdded="TagsCollection_TokenItemAdded"
+            TokenItemRemoving="TagsCollection_TokenItemRemoving"
+            TokenItemClick="TagsCollection_TokenItemClick"
+            BorderThickness="0"
+            SelectionMode="None"
+            Background="Transparent"
+            TokenSpacing="10"
+            Padding="5"
+            PlaceholderText="Add Tags"
+            SuggestedItemsSource="{x:Bind _viewModel.TagsSuggestion,Mode=OneWay}">
+            <myControl:MyTokenizingTextBox.TokenItemTemplate>
+                <DataTemplate
+                    x:DataType="vobj:TagVobj">
+                    <StackPanel Orientation="Horizontal" >
+                        <Ellipse 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Fill="{x:Bind TagColor,Mode=OneWay}"
+                                Width="10"
+                                Height="10"
+                                Margin="0 0 10 0"/>
+                        <TextBlock 
+                            Margin="0 0 0 5"
+                            Text="{x:Bind Name,Mode=OneWay}" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+                   
+                </DataTemplate>
+            </myControl:MyTokenizingTextBox.TokenItemTemplate>
+            <myControl:MyTokenizingTextBox.SuggestedItemTemplate>
+                <DataTemplate
+                    x:DataType="model:Tag">
+                    <StackPanel Orientation="Horizontal" >
+                        <Ellipse 
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Fill="{x:Bind TagColor,Mode=OneWay}"
+                                Width="10"
+                                Height="10"
+                                Margin="0 0 10 0"/>
+                        <TextBlock 
+                            Margin="0 0 0 5"
+                            Text="{x:Bind Name,Mode=OneWay}" 
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                </DataTemplate>
+            </myControl:MyTokenizingTextBox.SuggestedItemTemplate>
+        </myControl:MyTokenizingTextBox>
+    </ScrollViewer>
+        
+
+   
+</UserControl>

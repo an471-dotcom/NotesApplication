@@ -1,0 +1,224 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.NoteDisplayUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:Notes_Application.Converters"
+    mc:Ignorable="d"
+    Loaded="UserControl_Loaded"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteView/NoteViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:PlaceholderForegroundBrushConverter x:Key="PlaceholderBrushConverter"/>
+            <converter:NoteForegroundConverter x:Key="NoteForegroundConverter"/>
+            <converter:StringToColorConverter x:Key="StringToColorConverter"/>
+            <converter:ColorShadeConverter x:Key="ColorShadeConverter"/>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:FavoriteForegroundBrushConverter x:Key="FavoriteForegroundConverter" />
+            <converter:BooleanInverseConverter x:Key="BooleanInverseConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid 
+        x:Name="NoteGrid"
+        Visibility="{x:Bind _viewModel.NoteVisibility,Mode=OneWay}"
+        Background="{x:Bind _viewModel.NoteColor,Mode=OneWay}"
+        CornerRadius="10"
+        HorizontalAlignment="Stretch"
+        Padding="20 0 20 0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"/>
+        </Grid.ColumnDefinitions>
+        <RelativePanel
+            x:Name="Toolbar"
+            HorizontalAlignment="Stretch">
+            
+            <Button
+                    x:Name="BackButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    Click="BackButton_Click"
+                    ToolTipService.ToolTip="Back"
+                    Visibility="{x:Bind ShowBackButton,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    Style="{StaticResource NoteIconButtonStyle}">
+                <FontIcon 
+                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                    Glyph="&#xE0A6;" 
+                    FontSize="16"
+                    Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"/>
+            </Button>
+
+           
+            
+            <StackPanel
+                    x:Name="AlignmentPanel"
+                    Orientation="Horizontal"
+                    Visibility="{x:Bind _viewModel.ToolbarVisibility,Mode=OneWay}"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True">
+
+                <Button
+                        ToolTipService.ToolTip="Align Left"
+                        x:Name="AlignLeftButton"
+                        Click="AlignLeftButton_Click"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource NoteIconButtonStyle}">
+                    <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE1A2;" 
+                        FontSize="14"
+                        Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"/>
+
+                </Button>
+
+                <Button
+                        x:Name="AlignCenterButton"
+                        Click="AlignCenterButton_Click"
+                        ToolTipService.ToolTip="Align Center"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource NoteIconButtonStyle}">
+                    <FontIcon 
+                        Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        FontSize="14"
+                        Glyph="&#xE1A1;" />
+                </Button>
+
+                <Button
+                        x:Name="AlignRightButton"
+                        Click="AlignRightButton_Click"
+                        ToolTipService.ToolTip="Align Right"
+                        Style="{StaticResource NoteIconButtonStyle}">
+                    <FontIcon 
+                        Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                        Glyph="&#xE8E2;" 
+                        FontSize="14"/>
+                </Button>
+            </StackPanel>
+
+            <Button 
+                x:Name="ColorPickerButton"
+                Margin="0 0 10 0"
+                ToolTipService.ToolTip="Note Color"
+                Style="{StaticResource ColorPickerButtonStyle}"
+                Visibility="{x:Bind _viewModel.ToolbarVisibility,Mode=OneWay}"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.LeftOf="FavoriteButton">
+                <Ellipse 
+                    Width="16" 
+                    Height="16" 
+                    Fill="{x:Bind MyColorPicker.Color,Mode=OneWay,Converter={StaticResource ColorShadeConverter}}"/>
+                <Button.Flyout>
+                    <Flyout>
+                        <ColorPicker 
+                            x:Name="MyColorPicker"
+                            Width="200"
+                            ColorSpectrumShape="Box"
+                            ColorChanged="MyColorPicker_ColorChanged"
+                            IsColorPreviewVisible="False"
+                            IsHexInputVisible="False"
+                            IsColorChannelTextInputVisible="False"
+                            IsColorSliderVisible="True"
+                            Color="{x:Bind _viewModel.NoteColor,Mode=TwoWay,Converter={StaticResource StringToColorConverter}}"
+                            />
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+            <Button x:Name="FavoriteButton"
+                    RelativePanel.LeftOf="PopOutButton"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"
+                    Style="{StaticResource FavoriteIconStyle}"
+                    Click="FavoriteButton_Click"
+                    Background="Transparent"
+                    Padding="0"
+                    CornerRadius="10"
+                    Margin="10 0 10 0">
+                <FontIcon
+                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                    Foreground="{x:Bind _viewModel.Note.IsFavorite,Mode=OneWay,Converter={StaticResource FavoriteForegroundConverter}}"
+                    FontSize="16"
+                    Glyph="&#xE00A;" />
+            </Button>
+            <Button 
+                x:Name="PopOutButton"
+                ToolTipService.ToolTip="Update"
+                Click="PopOutButton_Click"
+                Visibility="{x:Bind ShowPopOutButton,Mode=OneWay}"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.LeftOf="UpdateButton"
+                Margin="0 5 0 0"
+                Style="{StaticResource NoteIconButtonStyle}">
+                <FontIcon 
+                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                    Glyph="&#xE8A7;"
+                    FontSize="16"
+                    Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"/>
+            </Button>
+            <Button 
+                x:Name="UpdateButton"
+                ToolTipService.ToolTip="Update"
+                Click="UpdateButton_Click"
+                Visibility="{x:Bind _viewModel.ToolbarVisibility,Mode=OneWay}"
+                RelativePanel.AlignVerticalCenterWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True"
+                Margin="0 5 0 0"
+                Style="{StaticResource NoteIconButtonStyle}">
+                <FontIcon 
+                     FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                     Glyph="&#xE001;"
+                     FontSize="16"
+                     Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"/>
+            </Button>
+        </RelativePanel>
+
+        <TextBox
+                x:Uid="NoteTitle"
+                x:Name="TitleBox"
+                Grid.Row="1"
+                Text="{x:Bind _viewModel.Title,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource NoteTitleTextBoxStyle}"
+                Background="{x:Bind _viewModel.NoteColor,Mode=OneWay}"
+                Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"
+                PlaceholderForeground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource PlaceholderBrushConverter}}"
+                IsReadOnly="{x:Bind _viewModel.TextBoxReadOnly,Mode=OneWay}"
+                IsHitTestVisible="{x:Bind _viewModel.TextBoxReadOnly,Mode=OneWay,Converter={StaticResource BooleanInverseConverter}}"
+                TextWrapping="Wrap"
+                AcceptsReturn="False"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                FontSize="25"
+                MaxLength="160"
+                FontWeight="Bold"
+                BorderThickness="0"/>
+        <RichEditBox 
+                x:Name="ContentBox"
+                x:Uid="NoteContent"
+                Grid.Row="2"
+                Margin="0 10 0 0"
+                
+                Style="{StaticResource NoteContentRichEditTextBox}" 
+                ScrollViewer.HorizontalScrollMode="Enabled"   
+                BorderBrush="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource PlaceholderBrushConverter}}"
+                Foreground="{x:Bind _viewModel.NoteColor,Mode=OneWay,Converter={StaticResource NoteForegroundConverter}}"
+                Background="{x:Bind _viewModel.NoteColor,Mode=OneWay}"
+                IsReadOnly="{x:Bind _viewModel.TextBoxReadOnly,Mode=OneWay}"
+                IsHitTestVisible="{x:Bind _viewModel.TextBoxReadOnly,Mode=OneWay,Converter={StaticResource BooleanInverseConverter}}"
+                BorderThickness="0"
+                PlaceholderText="Content"
+                FontSize="18">
+        </RichEditBox>
+    </Grid>
+</UserControl>

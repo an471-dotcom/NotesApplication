@@ -1,0 +1,134 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.NoteGridViewUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:Notes_Application.Converters"
+    xmlns:ui="using:Microsoft.Toolkit.Uwp.UI"
+    xmlns:media="using:Microsoft.Toolkit.Uwp.UI.Media"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Loaded="UserControl_Loaded">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteView/NoteViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:FavoriteForegroundBrushConverter 
+                x:Key="FavoriteForegroundConverter" />
+            <converter:StringLengthConverter x:Key="NoteTitleLengthConverter" length="40"/>
+            <converter:DateConverter x:Key="DateConverter"/>
+            <converter:NoteTitleColorConverter x:Key="MyForegroundConverter"/>
+            <converter:FlyoutConverter 
+                               x:Key="MyFlyoutConverter"
+                               SharedNoteFlayoutMenu="{StaticResource SharedNoteFlayoutMenu}"
+                               NoteFlayoutMenu="{StaticResource NoteFlayoutMenu}" />
+
+            <MenuFlyout 
+            x:Key="NoteFlayoutMenu"
+            Placement="BottomEdgeAlignedLeft"
+            MenuFlyoutPresenterStyle="{StaticResource OptionFlyoutStyle}">
+
+                <MenuFlyoutItem 
+                Text="Trash" 
+                x:Uid="Delete"
+                Foreground="red" 
+                Click="DeleteItem_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE74D;" 
+                        Foreground="Red" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+            <MenuFlyout 
+                x:Key="SharedNoteFlayoutMenu" 
+                Placement="BottomEdgeAlignedLeft"
+                MenuFlyoutPresenterStyle="{StaticResource OptionFlyoutStyle}">
+                <MenuFlyoutItem 
+                    Text="Unshare" 
+                    x:Uid="Unshare"
+                     x:Name="UnShareNote"
+                    Foreground="Red"
+                    Click="UnShareNote_Click">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE1E0;"
+                        Foreground="Red"/>
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+          
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+
+    <Grid 
+            x:Name="NoteGrid"
+            HorizontalAlignment="Stretch"
+            Height="120"
+            Padding="10"
+            CornerRadius="10"
+            PointerEntered="StackPanel_PointerEntered"
+            PointerExited="StackPanel_PointerExited"
+            Background="{x:Bind Note.NoteColor,Mode=OneWay}">
+        
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+        <TextBlock 
+                FontWeight="SemiBold"
+                Foreground="{x:Bind Note.NoteColor,Mode=OneWay,Converter={StaticResource MyForegroundConverter}}"
+                Text="{x:Bind Note.Title,Mode=OneWay,Converter={StaticResource NoteTitleLengthConverter}}"/>
+        <TextBlock 
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Text="{x:Bind Note.CreatedAt,Mode=OneWay, Converter={StaticResource DateConverter}}"
+                FontSize="12"
+                Foreground="Gray"/>
+            <Button 
+                x:Name="OptionButton"
+                Grid.Column="1"
+                Visibility="Collapsed"
+                Click="OptionButton_Click"
+                HorizontalAlignment="Right"
+                Foreground="{x:Bind Note.NoteColor,Converter={StaticResource MyForegroundConverter}}"
+                VerticalAlignment="Top"
+                Style="{StaticResource NoteGridViewOptionButtonStyle}" 
+                FlyoutBase.AttachedFlyout="{x:Bind Note.IsSharedNote,Mode=OneWay, Converter={StaticResource MyFlyoutConverter}}">
+                <SymbolIcon Symbol="More" Margin="0" />
+            </Button>
+            <Button
+                x:Name="FavoriteButton"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Right"
+                Style="{StaticResource FavoriteIconStyle}"
+                Padding="0"
+                CornerRadius="10"
+                Background="Transparent"
+                Click="FavoriteButton_Click">
+                <FontIcon
+                    FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                    Foreground="{x:Bind Note.IsFavorite,Mode=OneWay,Converter={StaticResource FavoriteForegroundConverter}}"
+                    FontSize="16"
+                    Glyph="&#xE00A;" />
+            </Button>
+        </Grid>
+        
+    
+        
+    
+</UserControl>

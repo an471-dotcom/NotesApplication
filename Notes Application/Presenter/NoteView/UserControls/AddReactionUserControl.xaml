@@ -1,0 +1,132 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.AddReactionUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:Notes_Library.Models"
+    xmlns:converter="using:Notes_Application.Converters"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteView/NoteViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:VisibilityInverseConverter x:Name="VisibilityInverseConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+  
+
+        <Grid   
+            Background="{ThemeResource BackgroundBrush}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+            <Button 
+            x:Name="ReactionsButton"
+            Click="ReactionsButton_Click"
+            ToolTipService.Placement="Mouse"
+            ToolTipService.ToolTip="Reactions"
+            Background="Transparent"
+            Height="50"
+            HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal">
+                    <FontIcon 
+                        FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                        Glyph="&#xE19F;" 
+                        Margin="0 0 10 0"
+                        Visibility="{x:Bind _viewModel.ShowSelectedReaction,Mode=OneWay,Converter={StaticResource VisibilityInverseConverter}}"  />
+                    <FontIcon 
+                        FontFamily="Segoe UI Emoji" 
+                        Glyph="{x:Bind _viewModel.SelectedReaction.Glyph,Mode=OneWay}"  
+                        Visibility="{x:Bind _viewModel.ShowSelectedReaction,Mode=OneWay}"
+                        VerticalAlignment="Center"
+                        Margin="0 0 10 0"
+                        />
+                    <TextBlock 
+                        VerticalAlignment="Center"
+                        Text="{x:Bind _viewModel.ReactionButtonText,Mode=OneWay}"/>
+                </StackPanel>
+               
+                <Button.Flyout>
+                <Flyout FlyoutPresenterStyle="{ThemeResource MyFlyoutStyle}" >
+                    <ListView  
+                            ItemContainerStyle="{StaticResource ReactionListViewItemContainer}"
+                            SelectionMode="Single"
+                            ItemClick="ReactionList_ItemClick"
+                            IsItemClickEnabled="True"
+                            SelectedItem="{x:Bind _viewModel.SelectedReaction,Mode=OneWay}"
+                            ScrollViewer.HorizontalScrollMode="Enabled" 
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                            ScrollViewer.IsHorizontalRailEnabled="False"
+                            ItemsSource="{x:Bind _viewModel.ReactionList}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="model:ReactionIcon">
+                                    <FontIcon FontFamily="Segoe UI Emoji" Glyph="{x:Bind Glyph}"  />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        <Button 
+            x:Name="SharedUserButton"
+            Grid.Column="1"
+            Height="50"
+            ToolTipService.ToolTip="Shared By"
+            ToolTipService.Placement="Mouse"
+            Background="Transparent"
+            HorizontalAlignment="Stretch">
+            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE13D;" />
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <PersonPicture 
+                            Grid.Row="1"
+                            DisplayName="{x:Bind _viewModel.SharedUserName,Mode=OneWay}" 
+                            Width="70" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Top" />
+                        <StackPanel 
+                            Grid.Row="2" 
+                            Margin="0 10 0 0" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+                            <TextBlock
+                                Text="{x:Bind _viewModel.SharedUserName,Mode=OneWay}"
+                                FontWeight="Bold"
+                                HorizontalAlignment="Center"
+                                FontSize="18"
+                                VerticalAlignment="Top" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <FontIcon 
+                                    FontSize="14" 
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                    Glyph="&#xE119;" 
+                                    Margin="0 10 0 0"
+                                    Foreground="Gray" />
+                                <TextBlock
+                                    FontSize="14"
+                                    Margin="10 5 0 0"
+                                    Text="{x:Bind _viewModel.SharedUserEmail,Mode=OneWay}"
+                                    Foreground="Gray"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        </Grid>
+
+   
+</UserControl>

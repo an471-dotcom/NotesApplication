@@ -1,0 +1,109 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.NotebookUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Notes_Application.Converters"
+    xmlns:converters1="using:Notes_Application.Util.Converters"
+    mc:Ignorable="d"
+    Loaded="UserControl_Loaded"
+    d:DesignHeight="300"
+    d:DesignWidth="400"  >
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteBookView/NoteBookViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:DateFormatConverter x:Key="DateFormatConverter"/>
+            <converters1:StringToImageConverter x:Key="StringToImageConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <StackPanel>
+        
+        <Canvas 
+            Width="150" 
+            Height="212.164"
+            PointerEntered="Canvas_PointerEntered"
+            PointerExited="Canvas_PointerExited">
+            <Border  
+                Height="212.162" 
+                CornerRadius="0 8 8 0"  
+                Canvas.Top="0" 
+                Canvas.Left="0">
+                <Image 
+                    x:Name="NotebookCoverImage"
+                    Width="150" 
+                    Stretch="UniformToFill" 
+                    Source="{x:Bind _viewModel.Notebook.NoteBookCover,Mode=OneWay,Converter={StaticResource StringToImageConverter}}">
+                </Image>
+
+             
+            </Border>
+            <Button 
+                x:Name="OptionButton"
+                Visibility="Collapsed"
+                Canvas.Left="120"
+                Canvas.Top="10"
+                Style="{StaticResource OptionButtonStyle}">
+                <SymbolIcon 
+                    Symbol="More"
+                    Foreground="White" />
+                <Button.Flyout>
+                    <MenuFlyout  
+                        Placement="BottomEdgeAlignedLeft"
+                        MenuFlyoutPresenterStyle="{StaticResource OptionFlyoutStyle}">
+                        <MenuFlyoutItem x:Name="RenameItem" Text="Rename" Click="RenameItem_Click">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon 
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                    Glyph="&#xE13E;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutItem  Text="ChangeCover" Click="ChangeNotebookCoverItemClick">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon 
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                    Glyph="&#xEB9F;" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                        <MenuFlyoutSeparator/>
+                        <MenuFlyoutItem Text="Delete" Foreground="red" Click="DeleteItem_Click">
+                            <MenuFlyoutItem.Icon>
+                                <FontIcon 
+                                    FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                    Glyph="&#xE74D;" 
+                                    Foreground="Red" />
+                            </MenuFlyoutItem.Icon>
+                        </MenuFlyoutItem>
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </Canvas>
+
+    
+        <TextBox 
+            x:Name="RenameTextBox"
+            Style="{StaticResource NotebookTitleTextBoxStyle}"
+            Text="{x:Bind _viewModel.NotebookName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            IsReadOnly="{x:Bind _viewModel.IsReadOnly,Mode=OneWay}" 
+            ToolTipService.ToolTip="{x:Bind Notebook.Name}"
+            ToolTipService.Placement="Mouse"
+            IsDoubleTapEnabled="True"
+            HorizontalAlignment="Center"
+            Margin="0 10 0 0"
+            TextWrapping="NoWrap"
+            HorizontalTextAlignment="Center"
+            TextAlignment="Center"
+            MaxWidth="140"
+            Background="Transparent"
+            FontSize="18"
+            BorderThickness="0"
+            LostFocus="RenameTextBox_LostFocus"
+            KeyDown="RenameTextBox_KeyDown"/>
+    </StackPanel>
+
+</UserControl>

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="All Notes" xml:space="preserve">
+    <value>அனைத்து குறிப்புகள்</value>
+    <comment>All Notes Text</comment>
+  </data>
+  <data name="CancelButton.Content" xml:space="preserve">
+    <value>ரத்து செய்</value>
+    <comment>Cancel Button</comment>
+  </data>
+  <data name="CommentPlaceholderText" xml:space="preserve">
+    <value>ஒரு கருத்தைச் சேர்க்கவும்</value>
+    <comment>Comment Placeholder Text</comment>
+  </data>
+  <data name="CommentText" xml:space="preserve">
+    <value>கருத்துகள்</value>
+    <comment>Comment Text</comment>
+  </data>
+  <data name="DefaultNoteColor.Text" xml:space="preserve">
+    <value>இயல்புநிலை குறிப்பு நிறம்</value>
+    <comment>DefaultNoteColorText</comment>
+  </data>
+  <data name="Delete.Text" xml:space="preserve">
+    <value>நீக்கு</value>
+    <comment>Delete Button Text</comment>
+  </data>
+  <data name="Email.FontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="Email.Text" xml:space="preserve">
+    <value>மின்னஞ்சல்</value>
+  </data>
+  <data name="EmailAlreadyExists" xml:space="preserve">
+    <value>மின்னஞ்சல் ஏற்கனவே உள்ளது</value>
+    <comment>Email Already Exists Error Message</comment>
+  </data>
+  <data name="EnterEmail.FontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="EnterEmail.Text" xml:space="preserve">
+    <value>மின்னஞ்சலை உள்ளிடவும்</value>
+    <comment>Email Text</comment>
+  </data>
+  <data name="EnterName.FontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="EnterName.Text" xml:space="preserve">
+    <value>பெயரை உள்ளிடுக</value>
+    <comment>Name Text</comment>
+  </data>
+  <data name="EnterPassword.FontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="EnterPassword.Text" xml:space="preserve">
+    <value>கடவுச்சொல்லை உள்ளிடவும்</value>
+    <comment>Password Text</comment>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>பிடித்தவை</value>
+    <comment>Favorites Text</comment>
+  </data>
+  <data name="FavoritesItem.Text" xml:space="preserve">
+    <value>பிடித்தவை</value>
+    <comment>Navigation Favorites Item</comment>
+  </data>
+  <data name="FillAllFields" xml:space="preserve">
+    <value>தேவையான அனைத்து புலங்களையும் நிரப்பவும்</value>
+    <comment>Fill all fields Error Message</comment>
+  </data>
+  <data name="Filter.Text" xml:space="preserve">
+    <value>வடிகட்டி</value>
+    <comment>Filter Text</comment>
+  </data>
+  <data name="Login.FontSize" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="Login.Text" xml:space="preserve">
+    <value>உள்நுழை</value>
+    <comment>Login text</comment>
+  </data>
+  <data name="LogoutButton.Content" xml:space="preserve">
+    <value>வெளியேறு</value>
+    <comment>Logout Text</comment>
+  </data>
+  <data name="NotebookItem.Text" xml:space="preserve">
+    <value>குறிப்பேடுகள்</value>
+    <comment>Navigation NoteBook Item</comment>
+  </data>
+  <data name="NoteBooks" xml:space="preserve">
+    <value>குறிப்பேடுகள்</value>
+    <comment>NoteBook</comment>
+  </data>
+  <data name="NoteContent.PlaceholderText" xml:space="preserve">
+    <value>குறிப்பு உள்ளடக்கம்</value>
+    <comment>Note content text</comment>
+  </data>
+  <data name="NoteCreatedAt.Text" xml:space="preserve">
+    <value>உருவாக்கப்பட்டது</value>
+    <comment>NoteCreatedAt</comment>
+  </data>
+  <data name="NoteItem.Text" xml:space="preserve">
+    <value>அனைத்து குறிப்புகள்</value>
+    <comment>Navigation Note Item</comment>
+  </data>
+  <data name="NotesInfo.Text" xml:space="preserve">
+    <value>குறிப்புகள் எதுவும் இல்லை</value>
+    <comment>No Notes Available</comment>
+  </data>
+  <data name="NoteTitle.PlaceholderText" xml:space="preserve">
+    <value>தலைப்பு</value>
+    <comment>NoteTitlePlaceholder</comment>
+  </data>
+  <data name="NoteUpdatedAt.Text" xml:space="preserve">
+    <value>புதுப்பிக்கப்பட்டது</value>
+    <comment>NoteUpdatedAt</comment>
+  </data>
+  <data name="Password.FontSize" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="Password.Text" xml:space="preserve">
+    <value>கடவுச்சொல்</value>
+  </data>
+  <data name="Reply.Text" xml:space="preserve">
+    <value>பதில்</value>
+    <comment>Reply Button Text</comment>
+  </data>
+  <data name="ReplyPlaceholderText" xml:space="preserve">
+    <value>ஒரு பதிலைச் சேர்க்கவும்</value>
+    <comment>ReplyPlaceholderText</comment>
+  </data>
+  <data name="ReplyText" xml:space="preserve">
+    <value>பதில்கள்</value>
+    <comment>Reply Text</comment>
+  </data>
+  <data name="SelectedNoteInfo.Text" xml:space="preserve">
+    <value>குறிப்புகள்  எதுவும்தேர்ந்தெடுக்கப்படவில்லை</value>
+    <comment>Selected Note Info Text</comment>
+  </data>
+  <data name="ShareButton.Content" xml:space="preserve">
+    <value>பகிர்</value>
+    <comment>Share Button Text</comment>
+  </data>
+  <data name="Shared Notes" xml:space="preserve">
+    <value>பகிரப்பட்ட குறிப்புகள்</value>
+    <comment>Shared Notes Text</comment>
+  </data>
+  <data name="SharedInfo.Text" xml:space="preserve">
+    <value>பகிரப்பட்ட பயனர்கள்:</value>
+    <comment>Shared info text</comment>
+  </data>
+  <data name="SharedNoteItem.Text" xml:space="preserve">
+    <value>பகிரப்பட்ட குறிப்புகள்</value>
+    <comment>Navigation SharedNote Item</comment>
+  </data>
+  <data name="ShowPassword.Content" xml:space="preserve">
+    <value>கடவுச்சொல்லை காட்டவும்</value>
+    <comment>Show Password Text</comment>
+  </data>
+  <data name="SignInButton.Content" xml:space="preserve">
+    <value>உள்நுழையவும்</value>
+    <comment>SignIn Button Text</comment>
+  </data>
+  <data name="SignUp.FontSize" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="SignUp.Text" xml:space="preserve">
+    <value>பதிவு செய்யவும்</value>
+    <comment>SignUp Text</comment>
+  </data>
+  <data name="SignUpButton.Content" xml:space="preserve">
+    <value>பதிவு செய்யவும்</value>
+    <comment>SignUp Button Text</comment>
+  </data>
+  <data name="Tag.Text" xml:space="preserve">
+    <value>குறிச்சொற்கள்</value>
+    <comment>Tags Text</comment>
+  </data>
+  <data name="Tags.PlaceholderText" xml:space="preserve">
+    <value>குறிச்சொற்களைச் சேர்க்கவும்</value>
+    <comment>Tags Placeholder text</comment>
+  </data>
+  <data name="Unshare.Text" xml:space="preserve">
+    <value>பகிர்வதை நிறுத்து</value>
+    <comment>UnshareButton Text</comment>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>பயனர் கிடைக்கவில்லை</value>
+    <comment>User not found Error Message</comment>
+  </data>
+  <data name="ValidEmailAddress" xml:space="preserve">
+    <value>சரியான மின்னஞ்சல் முகவரி இல்லை</value>
+    <comment>Valid Email Address Error Message</comment>
+  </data>
+  <data name="ViewBy.Text" xml:space="preserve">
+    <value>காண்க:</value>
+    <comment>View By</comment>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>தவறான கடவுச்சொல்</value>
+    <comment>Wrong Password Error Message</comment>
+  </data>
+</root>

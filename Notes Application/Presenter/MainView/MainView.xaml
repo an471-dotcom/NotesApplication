@@ -1,0 +1,199 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:Notes_Application.Converters"
+    xmlns:model="using:Notes_Library.Models"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    xmlns:control="using:Notes_Application.UserControls"
+    xmlns:Custom="using:System.Numerics"
+    x:Class="Notes_Application.View.MainView"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded"
+    >
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/MainView/MainViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:StringToColorConverter x:Key="StringToColorConverter"/>
+            <converter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.Background>
+        <ThemeResource ResourceKey="ApplicationPageBackgroundThemeBrush"/>
+    </Page.Background>
+    <Grid >
+
+        <NavigationView 
+                    IsBackEnabled="True"
+                    x:Name="NavView" 
+                    PaneDisplayMode="Top"
+                    IsSettingsVisible="False"
+                    IsBackButtonVisible="Collapsed"
+                    SelectionChanged="NavView_SelectionChanged"
+                    PaneTitle="Notes"
+                    HorizontalContentAlignment="Center">
+            <NavigationView.MenuItems>
+                <NavigationViewItem 
+                    x:Name="NoteItem" 
+                    Tag="Note">
+                    <TextBlock x:Uid="NoteItem"/>
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    x:Name="FavoritesItem" 
+                    Tag="Favorites">
+                    <TextBlock x:Uid="FavoritesItem"/>
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    x:Name="NotebookItem"  
+                    Tag="Notebook" >
+                    <TextBlock x:Uid="NoteBookItem"/>
+                </NavigationViewItem>
+                <NavigationViewItem 
+                    x:Name="SharedItem"  
+                    Tag="Shared" >
+                    <TextBlock x:Uid="SharedNoteItem"/>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <NavigationView.PaneFooter>
+
+                <Button 
+                        x:Name="UserDetailButton"
+                        Style="{StaticResource MyIconButtonStyle}"
+                        ToolTipService.Placement="Top"
+                        Click="UserDetailButton_Click"
+                        ToolTipService.ToolTip="User"
+                        Margin="0 0 10 0">
+                    <Button.Flyout >
+                        <Flyout  
+                                FlyoutPresenterStyle="{StaticResource MyFlyoutStyle}">
+                            <Grid 
+                                     Width="230"
+                                     Padding="10 10 10 0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Button 
+                                        x:Name="SwitchThemeButton"
+                                        Style="{StaticResource ThemeButtonStyle}"
+                                        Padding="5"
+                                        Click="SwitchThemeButton_Click"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top">
+                                    <FontIcon 
+                                            FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                            Glyph="&#xE793;" />
+                                </Button>
+                                <PersonPicture  
+                                            HorizontalAlignment="Center" 
+                                            Width="60" 
+                                            DisplayName="{x:Bind Path=_viewModel.UserName}"
+                                            Margin="0 0 0 0" />
+                                <StackPanel 
+                                            Grid.Row="1"
+                                            Margin="0 5 0 5"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <TextBlock 
+                                               x:Name="UserNameTextblock" 
+                                               Text="{x:Bind Path=_viewModel.UserName}"
+                                               Style="{ThemeResource BaseTextBlockStyle}" 
+                                               FontSize="14"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock 
+                                               x:Name="UserEmailTextBlock"
+                                               Text="{x:Bind Path=_viewModel.Email}"
+                                               Style="{ThemeResource CaptionTextBlockStyle}"
+                                               FontSize="14"/>
+                                </StackPanel>
+                                <Button 
+                                        x:Name="LogoutButton"
+                                        x:Uid="LogoutButton"
+                                        Padding="10 5 10 5"
+                                        Style="{StaticResource LogoutButtonStyle}"
+                                        CornerRadius="10"
+                                        Click="LogoutButton_Click"
+                                        Grid.Row="2"
+                                        Background="Red"
+                                        HorizontalAlignment="Center"
+                                        Margin="0 10 0 0">
+
+                                </Button>
+                                <NavigationViewItemSeparator Grid.Row="3" Margin="-35 5 -35 2"/>
+                                <Button 
+                                        Grid.Row="4"
+                                        Margin="-17 -8 -17 -8"
+                                        BorderThickness="0"
+                                        VerticalAlignment="Bottom"
+                                        Style="{StaticResource ColorButtonStyle}"
+                                        HorizontalAlignment="Stretch">
+                                    <Button.Flyout>
+                                        <Flyout Placement="Bottom">
+                                            <Viewbox Margin="5" MaxWidth="200" Stretch="Fill">
+                                                <ColorPicker 
+                                                        x:Name="MyColorPicker"
+                                                        Color="{x:Bind Converter={StaticResource StringToColorConverter}, Mode=TwoWay, Path=_viewModel.NoteColor}"
+                                                        ColorChanged="MyColorPicker_ColorChanged"
+                                                        ColorSpectrumShape="Ring"
+                                                        IsColorPreviewVisible="False"
+                                                        IsColorChannelTextInputVisible="False"
+                                                        IsHexInputVisible="False"
+                                                        IsAlphaSliderVisible="False"
+                                                        IsColorSliderVisible="False"/>
+                                            </Viewbox>
+                                        </Flyout>
+                                    </Button.Flyout>
+                                    <Grid 
+                                            Width="220"   
+                                            Padding="0 3 0 3"
+                                            HorizontalAlignment="Stretch">
+                                        <TextBlock 
+                                                x:Uid="DefaultNoteColor"
+                                                MaxWidth="185"
+                                                FontSize="14"
+                                                TextTrimming="CharacterEllipsis"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center">
+                                            <ToolTipService.ToolTip>
+                                                <TextBlock 
+                                                    x:Uid="DefaultNoteColor"/>
+                                            </ToolTipService.ToolTip>
+                                        </TextBlock>
+                                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                            <Ellipse Width="18" Height="18" Fill="{x:Bind Converter={StaticResource ColorToBrushConverter}, Mode=OneWay, Path=MyColorPicker.Color}" Margin=" 0 0 5 0" />
+                                            <FontIcon FontFamily="{ThemeResource SymbolThemeFontFamily}" Glyph="&#xE0E3;" FontSize="13" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button>
+                            </Grid>
+                        </Flyout>
+                    </Button.Flyout>
+                    <FontIcon 
+                                FontFamily="{ThemeResource SymbolThemeFontFamily}" 
+                                Glyph="&#xE2AF;" 
+                                FontSize="16" />
+                </Button>
+
+            </NavigationView.PaneFooter>
+            <Frame  
+                x:Name="contentFrame"/>
+        </NavigationView>
+        <controls:InAppNotification x:Name="ExampleInAppNotification"
+                                    Content="This is a test message."
+                                    ShowDismissButton="True"
+                                    AnimationDuration="00:00:00.1000000"
+                                    VerticalOffset="100"
+                                    Canvas.ZIndex="10"
+                                    HorizontalOffset="0"
+                                    StackMode="Replace"/>
+
+    </Grid>
+</Page>

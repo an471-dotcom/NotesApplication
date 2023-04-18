@@ -1,0 +1,107 @@
+﻿<ContentDialog
+    x:Class="Notes_Application.Dialogs.SignUpDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="ContentDialog_Loaded"
+    mc:Ignorable="d">
+    
+
+    <Grid Width="340">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <RelativePanel>
+            <TextBlock 
+                x:Uid="SignUp"/>
+            <Button x:Name="CloseButton"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Background="Transparent"
+                    Click="CloseButton_Click"                    >
+                <SymbolIcon Symbol="Clear"/>
+            </Button>
+
+
+        </RelativePanel>
+        <TextBlock 
+            Grid.Row="1"
+            Text="Enter Name:"
+            x:Uid="EnterName"
+            Margin="0 35 0 0"/>
+        <TextBox 
+            x:Name="UserNameTextBox"
+            Grid.Row="2"
+            Text="{x:Bind SignUpVm.UsernameText,Mode=TwoWay}"
+            Margin="0 5 0 0"
+            FontSize="18"/>
+        <TextBlock 
+            Grid.Row="3"
+            Text="Enter Email:"
+            x:Uid="EnterEmail"
+            Margin="0 15 0 0"/>
+        <TextBox 
+            x:Name="EmailTextBox"
+            Grid.Row="4"
+            IsSpellCheckEnabled="False"
+            InputScope="EmailNameOrAddress"
+            Text="{x:Bind SignUpVm.EmailText,Mode=TwoWay}"
+            CharacterCasing="Lower"
+            Margin="0 5 0 0"
+            FontSize="18"/>
+        <TextBlock 
+            Grid.Row="5"
+            x:Uid="EnterPassword"
+            Text="Enter Password:"
+            Margin="0 15 0 0"/>
+        <PasswordBox 
+            x:Name="SignUpPasswordBox"
+            Grid.Row="6"
+            Password="{x:Bind SignUpVm.PasswordText,Mode=TwoWay}"
+            Margin="0 5 0 0"
+            FontSize="18"/>
+        <CheckBox 
+            Content="Show Password"
+            FontSize="16"
+            Grid.Row="7"
+            x:Uid="ShowPassword"
+            Margin="0 5 0 0"
+            x:Name="ShowPasswordCheckBox"
+            Checked="ShowPasswordCheckBox_Checked"
+            Unchecked="ShowPasswordCheckBox_Checked"
+            IsChecked="False">
+
+        </CheckBox>
+
+        <TextBlock 
+            x:Name="ErrorTextBox"
+            Grid.Row="8"
+            FontSize="18"
+            TextWrapping="Wrap"
+            HorizontalTextAlignment="Center"
+            Text="{x:Bind SignUpVm.ErrorText,Mode=OneWay}"
+            Foreground="Red"
+            Margin="0 10 0 0"
+            HorizontalAlignment="Center"/>
+        <Button 
+            x:Name="SignUpButton"
+            Content="Sign Up"
+            x:Uid="SignUpButton"
+            Grid.Row="9"
+            HorizontalAlignment="Center"
+            Margin="0 15 0 0"
+            Click="{x:Bind SignUpVm.SignUpButton_Click}"
+            Style="{ThemeResource AccentButtonStyle}"/>
+       
+    </Grid>
+</ContentDialog>

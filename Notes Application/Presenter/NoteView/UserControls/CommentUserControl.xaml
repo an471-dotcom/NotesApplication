@@ -1,0 +1,87 @@
+﻿<UserControl
+    x:Class="Notes_Application.UserControls.CommentUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Notes_Application.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="UserControl_Loaded"
+    xmlns:converter="using:Notes_Application.Converters"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Presenter/NoteView/NoteViewStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:DateToTimeSpanConverter x:Key="DateToTimeSpanConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid
+        Margin="0 10 0 15"
+        Width="335"
+        Padding="10 0 10 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <PersonPicture 
+            Width="30"
+            VerticalAlignment="Top" />
+        <StackPanel
+                Grid.Column="1"
+                Margin="10 0 0 0"
+                VerticalAlignment="Top">
+            <StackPanel
+                Margin="0"
+                Orientation="Horizontal"
+                x:Name="UserDetailPanel">
+                <TextBlock
+                        Text="{x:Bind Comment.CommentedByUsername, Mode=OneWay}"
+                        FontSize="12" />
+                <TextBlock
+                        Margin="10 0 0 0"
+                        Text="{x:Bind Comment.CommentedAt,Converter={StaticResource DateToTimeSpanConverter}}"
+                        Foreground="Gray"
+                        FontSize="10" />
+            </StackPanel>
+            <TextBlock
+                    Text="{x:Bind Comment.Content}"
+                    TextWrapping="Wrap"
+                    Padding="0" />
+        </StackPanel>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="1"
+            Grid.Column="1">
+            <Button
+                x:Name="DeleteCommentButton"
+                VerticalAlignment="Top"
+                FontSize="12"
+                Foreground="Gray"
+                Margin="10 0 0 0"
+                Click="DeleteCommentButton_Click"
+                Visibility="{x:Bind DeleteButtonVisibility,Mode=OneWay}"
+                Style="{StaticResource CommentOptionButtonStyle}">
+                <TextBlock x:Uid="Delete"/>
+            </Button>
+
+            <Button 
+                x:Name="ReplyButton"
+                Style="{StaticResource CommentOptionButtonStyle}"
+                Foreground="Gray"
+                Click="ReplyButton_Click"
+                FontSize="12"
+                Margin="10 0 0 0">
+                <TextBlock x:Uid="Reply" Text="Reply"/>
+            </Button>
+        </StackPanel>
+       
+    </Grid>
+</UserControl>
